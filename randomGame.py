@@ -3,11 +3,13 @@ from random import randint
 print("Выберите режим:")
 print("Диапазон")
 print("Орел и Решка")
+print("Камень Ножницы бумага")
 choice = input("Ваш выбор: ").lower().strip()
 
 
-range_mode = ["диапазон", "диапозон"]  
+range_mode = ["диапазон", "диапозон"]
 coin_toss = ["орел и решка", "орёл и решка", "орел", "орёл", "решка"]
+rock_scissors_paper = ["камень", "ножницы", "бумага"]
 
 if choice in range_mode:
     print("Введите границы диапазона:")
@@ -31,9 +33,8 @@ elif choice in coin_toss:
     print("2 - Решка")
     uchoice = input("Ваш выбор: ").lower().strip()
 
-
     userChoice = None
-    
+
     if uchoice in ["орел", "орёл", "1"]:
         userChoice = 1
         choice_name = "Орел"
@@ -50,8 +51,42 @@ elif choice in coin_toss:
     if orelreshka == userChoice:
         print(f"Поздравляю, вы выиграли! Ставка '{choice_name}' оказалась верной!")
     else:
-        print(f"К сожалению, ваша ставка '{choice_name}' неверна, выпало '{result_name}'")
+        print(
+            f"К сожалению, ваша ставка '{choice_name}' неверна, выпало '{result_name}'"
+        )
+
+elif choice in rock_scissors_paper:
+    print("Выберите свой вариант:")
+    print("1 - Камень")
+    print("2 - Ножницы")
+    print("3 - Бумага")
+    uchoice = input("Ваш выбор: ").lower().strip()
+
+    variants = ["камень", "ножницы", "бумага"]
+    compIndex = randint(0, 2)
+    compChoice = variants[compIndex]
+
+    if uchoice in ["камень", "1"]:
+        userIndex = 0
+        choice_name = "Камень"
+    elif uchoice in ["ножницы", "2"]:
+        userIndex = 1
+        choice_name = "Ножницы"
+    elif uchoice in ["бумага", "3"]:
+        userIndex = 2
+        choice_name = "Бумага"
+    else:
+        print("Некорректный выбор!")
+        exit()
+
+    if userIndex == compIndex:
+        print("Ничья!")
+    elif (userIndex - compIndex) % 3 == 1:
+        print(f"Компьютер выиграл!, компьютер выбрал: {compChoice}")
+    else:
+        print("Вы выиграли, поздравляю")
+
+    print(f"Компьютер выбрал {compChoice}")
 
 else:
     print("Такого режима нет")
-
