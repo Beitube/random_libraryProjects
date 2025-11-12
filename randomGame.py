@@ -4,12 +4,14 @@ print("Выберите режим:")
 print("Диапазон")
 print("Орел и Решка")
 print("Камень Ножницы бумага")
+print("Кости")
 choice = input("Ваш выбор: ").lower().strip()
 
 
 range_mode = ["диапазон", "диапозон"]
 coin_toss = ["орел и решка", "орёл и решка", "орел", "орёл", "решка"]
 rock_scissors_paper = ["камень", "ножницы", "бумага"]
+bones = ["кости"]
 
 if choice in range_mode:
     print("Введите границы диапазона:")
@@ -87,6 +89,27 @@ elif choice in rock_scissors_paper:
         print("Вы выиграли, поздравляю")
 
     print(f"Компьютер выбрал {compChoice}")
+
+elif choice in bones:
+    userChoice = int(
+        input(
+            (
+                print(
+                    "Введите число которое по вашему мнению выпадет на костях, от 1 до 6:"
+                )
+            )
+        )
+    )
+
+    if userChoice > 6 or userChoice < 1:
+        print("К сожалению, мы используем кости с значениями от 1 до 6")
+    else:
+        random_number = randint(1, 6)
+
+        if userChoice == random_number:
+            print(f"Поздравляю! Вы угадали! Число на костях было {random_number}.")
+        else:
+            print(f"К сожалению, вы не угадали. Число на костях было {random_number}.")
 
 else:
     print("Такого режима нет")
