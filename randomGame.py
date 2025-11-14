@@ -95,23 +95,28 @@ elif choice in rock_scissors_paper:
 
 elif choice in bones:
 
-    userChoice = int(
-        input(
-            print(
-                "Введите число которое по вашему мнению выпадет на костях, от 1 до 6:"
+    usCh = int(input(print("Сколько кубиков хотите бросить?")))
+
+    if usCh <= 0:
+        print("Ошибка")
+    else:
+        rand = randint(1, usCh * 6)
+
+        userChoice = int(
+            input(
+                print(
+                    f"Введите число которое по вашему мнению выпадет на костях, от 1 до {usCh * 6}:"
+                )
             )
         )
-    )
 
-    if userChoice > 6 or userChoice < 1:
-        print("К сожалению, мы используем кости с значениями от 1 до 6")
-    else:
-        random_number = randint(1, 6)
-
-        if userChoice == random_number:
-            print(f"Поздравляю! Вы угадали! Число на костях было {random_number}.")
+        if userChoice > usCh * 6 or userChoice <= 0:
+            print("Ошибка")
         else:
-            print(f"К сожалению, вы не угадали. Число на костях было {random_number}.")
+            if userChoice == rand:
+                print(f"Поздравляю! Вы угадали! Число на костях было {rand}.")
+            else:
+                print(f"К сожалению, вы не угадали. Число на костях было {rand}.")
 
 elif choice in cubes:
     usCh = int(input(print("Сколько кубиков хотите бросить?")))
