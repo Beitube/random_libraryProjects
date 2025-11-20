@@ -1,7 +1,7 @@
 from random import randint
 
 print(
-    "Выберите режим: \nДиапазон \nОрел и Решка \nКамень Ножницы бумага \nКости \nКубики \nЧет-Нечет \nВаш выбор: "
+    "Выберите режим: \nДиапазон \nОрел и Решка \nКамень Ножницы бумага \nКости \nКубики \nЧет-Нечет \nРусская рулетка \nВаш выбор: "
 )
 choice = input().lower().strip()
 
@@ -25,6 +25,7 @@ rulette = [
     "нечет",
     "нечёт",
 ]
+rusrulette = ["русская рулетка", "рулетка"]
 
 if choice in range_mode:
     print("Введите границы диапазона:")
@@ -154,5 +155,35 @@ elif choice in rulette:
     else:
         print(f"К сожалению, вы проиграли, число было {rand}")
 
+elif choice in rusrulette:
+    bullets = [False] * 6
+    rand = randint(0, 5)
+    bullets[rand] = True
+
+    curchable = 0
+    gameover = False
+
+    while curchable < 6 and not gameover:
+        print(f"Ход {curchable + 1}, приготовтесь!\n")
+        print("Что вы выберите: 1 - стрелять в себя; 2 - стрелять в компьютер\n")
+
+        action = input("Ваш выбор: ").strip()
+
+        if action == "1":
+            if bullets[curchable]:
+                print("Прогремел выстрел! Вы проиграли...")
+                gameover = True
+            else:
+                print("Щелчок, выстрела не последовало...")
+                curchable += 1
+        elif action == "2":
+            if bullets[curchable]:
+                print("Прогремел выстрел! Компьютер проиграл!")
+                gameover = True
+            else:
+                print("Щелчок, выстрела не последовало...")
+                curchable += 1
+        else:
+            print("Такого выбора нет")
 else:
     print("Такого режима нет")
