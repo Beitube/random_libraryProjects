@@ -1,34 +1,60 @@
 from random import *
 
-a = randint(1, 100)
-print("Добро пожаловать в числовую угадайку \nВведите число от 1 до 100:\n")
-
 
 def is_valid(b):
     return b.isdigit() and 1 <= int(b) <= 100
 
 
-def is_valid_num():
+def input_num():
     while True:
-        b = input("")
+        b = input()
         if is_valid(b):
             return int(b)
         else:
-            print("А может быть все-таки введем целое число от 1 до 100?")
+            print("Пожалуйста, вводите целые числа\n")
 
 
-def compare():
+def compare(f_num, s_num):
+    num = randint(f_num, s_num)
+    count = 0
     while True:
-        z = is_valid_num()
-        if z < a:
+        z = input_num()
+        count += 1
+        if z < num:
             print("Ваше число меньше загаданного, попробуйте еще разок")
-        elif z > a:
+        elif z > num:
             print("Ваше число больше загаданного, попробуйте еще разок")
-        elif z == a:
-            print("Вы угадали, поздравляем!")
+        elif z == num:
+            print(f"Вы угадали, поздравляем! Вы пытались угадать число {count} раз!\n")
+            count = 0
             break
 
 
-compare()
+def new_game():
+    ng = input("Хотите сыграть еще? Ответьте д/н \n").lower()
+    while True:
+        if ng not in ("n", "y", "д", "н"):
+            print("Пожалуйста, ответьте 'д' если готовы начать игру, 'н' если нет")
+        elif ng in ("n", "н"):
+            print("Удачи, и спасибо, что играли в числовую угадайку. Еще увидимся...")
+            return False
+        else:
+            return True
 
-print("Спасибо, что играли в числовую угадайку. Еще увидимся...")
+
+def startgame():
+    print("Добро пожаловать! Вы готовы начать игру?")
+    while True:
+        print("Укажите, в каком диапозоне вы желаете угадывать числа?")
+        x, y = input_num(), input_num()
+        if x > y:
+            x, y = y, x
+        print("Введите загаданное число, и узнайте угадали вы или же нет\n")
+        compare(x, y)
+        if new_game():
+            continue
+        else:
+            break
+
+
+startgame()
